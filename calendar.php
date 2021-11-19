@@ -41,7 +41,7 @@ function getEvents($day, $month, $year){
 <head>
 	<title>Michael Verban</title>
         <?php include 'head.html' ?>
-	<link rel="stylesheet" type="text/css" href="Calendar.css">
+	<link rel="stylesheet" type="text/css" href="style/Calendar.css">
 </head>
 <body>
 	<?php include 'header.html' ?>
