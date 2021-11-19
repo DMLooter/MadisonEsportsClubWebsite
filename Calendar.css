@@ -1,0 +1,55 @@
+table{
+	width:100%;
+}
+
+tr{
+	width:100%;
+	margin: auto;
+}
+
+td{
+	width: 10%;
+	min-height: 10em;
+	border: 1px black solid;
+	text-align: center;
+}
+
+.day{
+	min-height: 6em;
+	vertical-align:top;
+	display: flex;
+	clear:none;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+}
+
+.blank {
+	background-color: grey;
+}
+
+th {
+	text-align: center;
+	font-size:2em;
+}
+
+.event{
+	flex-grow: 0;
+	line-height:1.5em;
+	min-height: 1.5em;
+	border: 1px solid black;
+}
+
+.date {
+	flex-grow: 0;
+	line-height:1.5em;
+	height: 2em;
+	text-align: left;
+	border: 1px solid black;
+}
+
+.spacer{
+	flex-shrink:100;
+	flex-grow:1;
+	height: 0em;
+}
