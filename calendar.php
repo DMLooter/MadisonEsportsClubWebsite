@@ -1,6 +1,6 @@
 <?php
 $dbconfile = parse_ini_file("db.ini")["db_connection_file"];
-require $dbconfile;
+require_once $dbconfile;
 
 session_start();
 
@@ -40,14 +40,14 @@ function getEvents($day, $month, $year){
 <html>
 <head>
 	<title>Michael Verban</title>
-        <?php include 'head.html' ?>
+		<?php include 'head.html' ?>
 	<link rel="stylesheet" type="text/css" href="style/Calendar.css">
 </head>
 <body>
 	<?php include 'header.html' ?>
-        <script type="text/javascript">
-                window.onload = function(){document.getElementById('events').className = 'current-item';};
-        </script>
+		<script type="text/javascript">
+				window.onload = function(){document.getElementById('events').className = 'current-item';};
+		</script>
 
 
 	<div id="body">

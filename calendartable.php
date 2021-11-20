@@ -1,37 +1,36 @@
-<?php
-$dbconfile = parse_ini_file("db.ini")["db_connection_file"];
-require $dbconfile;
-
-session_start();
-
-$conn = OpenConnection();
-
-$sql = "SELECT * FROM Events ORDER BY Start DESC, Title;";
-$result = mysqli_query($conn, $sql);
-
-$days = array();
-while($row = mysqli_fetch_assoc($result)) {
-	$title = $row["Title"];
-	$loc = $row["Location"];
-	$start = getdate(strtotime($row["Start"]));
-	$end = getdate(strtotime($row["End"]));
-	if(array_key_exists($start['mday'], $days) === false){
-		$days[$start["mday"]] = array();
-	}
-	$days[$start['mday']][] = $row;	
-}
-
-CloseConnection($conn);
-?>
 <table id="calendar">
-    <tbody>
+	<tbody>
 		<?php
-            $month = $_GET["month"];
-            $year = $_GET["year"];
+			$month = $_GET["month"];
+			$year = $_GET["year"];
 
-            $input = $month."-".$year;
-            $date = DateTime::createFromFormat('d-m-Y', '01-' . $input);
-            $firstdate = getdate($date->getTimestamp());
+			$dbconfile = parse_ini_file("db.ini")["db_connection_file"];
+			require_once $dbconfile;
+
+			session_start();
+
+			$conn = OpenConnection();
+
+			$sql = "SELECT * FROM Events ORDER BY Start DESC, Title;";
+			$result = mysqli_query($conn, $sql);
+
+			$days = array();
+			while($row = mysqli_fetch_assoc($result)) {
+				$title = $row["Title"];
+				$loc = $row["Location"];
+				$start = getdate(strtotime($row["Start"]));
+				$end = getdate(strtotime($row["End"]));
+				if(array_key_exists($start['mday'], $days) === false){
+					$days[$start["mday"]] = array();
+				}
+				$days[$start['mday']][] = $row;	
+			}
+
+			CloseConnection($conn);
+
+			$input = $month."-".$year;
+			$date = DateTime::createFromFormat('d-m-Y', '01-'.$input);
+			$firstdate = getdate($date->getTimestamp());
 
 			print("<tr id='header-row'><th colspan=7>".$firstdate['month']."</th></tr>");
 
@@ -44,12 +43,12 @@ CloseConnection($conn);
 					print("<tr>");
 				}
 				if($dom > 0 && $dom <= $DIM){
-                    print("<td class='value'><div class='day'><div class='date'>".$dom."</div>");
-                    if(array_key_exists($dom, $days)){
-                        foreach($days[$dom] as $row){
-                            print("<div class='event'>".$row["Title"]."</div>");
-                        }
-                    }
+					print("<td class='value'><div class='day'><div class='date'>".$dom."</div>");
+					if(array_key_exists($dom, $days)){
+						foreach($days[$dom] as $row){
+							print("<div class='event'>".$row["Title"]."</div>");
+						}
+					}
 					print("<div class='spacer'></div></div></td>");
 				}else{
 					print("<td class='blank'></td>");
@@ -60,5 +59,5 @@ CloseConnection($conn);
 				$dow = ($dow + 1) % 7;
 			}
 		?>
-    </tbody>
+	</tbody>
 </table>
