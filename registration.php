@@ -21,10 +21,14 @@ require_once $dbconfile;
 
 	<div id="body">
 		<h1>Calendar</h1>
-		<form action="post" target="register.php">
-			<input name="u" />
-			<input name="e" />
-			<input name="p" type="password" />
+		<form action="register.php" method="post">
+			<label for="username">Username</label>
+			<input id="username" name="u" /><br>
+			<label for="email">Email</label>
+			<input id="email" name="e" /><br>
+			<label for="password">Password</label>
+			<input id="password" name="p" type="password" /><br>
+			<input type="submit">
 		</form>
 	</div>
 </body>

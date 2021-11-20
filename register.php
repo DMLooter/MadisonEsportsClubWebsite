@@ -11,23 +11,28 @@ require_once $dbconfile;
 
 $conn = OpenConnection();
 
-$stmt = $conn->prepare("INSERT INTO Users ([Username], [Email], [hash]) VALUES(?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO `Users` (`Username`, `Email`, `hash`) VALUES(?, ?, ?)");
+if($stmt === false){
+	header("Location: registration.php?success=false&failure=unknown");
+	exit();
+}
 $stmt->bind_param("sss", $username, $email, $hash);
-if($stmt->execute()){
+try{
+	$stmt->execute();
 	CloseConnection($conn);
 	header("Location: registration.php?success=true&user=".$username);
 	exit();
 	//print(json_encode(["Success" => true, "Username" => $row["Username"]]));
-}else{
+}catch(mysqli_sql_exception $e){
 	$error = $stmt->error;
 	$stmt->close();
-	if(str_contains($error, "UQ_Username")){
+	if(strpos($error, "UQ_Username") !== false){
 		CloseConnection($conn);
 		header("Location: registration.php?success=false&failure=username&user=".$username);
 		exit();
-	}else if(str_contains($error, "UQ_Email")){
+	}else if(strpos($error, "UQ_Email") !== false){
 		CloseConnection($conn);
-		header("Location: registration.php?success=false&failure=email&user=".$email);
+		header("Location: registration.php?success=false&failure=email&email=".$email);
 	exit();
 	}else{
 		CloseConnection($conn);
