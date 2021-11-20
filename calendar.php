@@ -6,7 +6,7 @@ session_start();
 
 $conn = OpenConnection();
 
-$sql = "SELECT * FROM Events ORDER BY Start DESC, Title;";
+$sql = "SELECT * FROM `Events` ORDER BY `Start` DESC, `Title`;";
 $result = mysqli_query($conn, $sql);
 
 $days = array();

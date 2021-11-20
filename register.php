@@ -11,7 +11,7 @@ require_once $dbconfile;
 
 $conn = OpenConnection();
 
-$stmt = $conn->prepare("INSERT INTO `Users` (`Username`, `Email`, `hash`) VALUES(?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO `Users` (`Username`, `Email`, `hash`) VALUES(?, ?, ?);");
 if($stmt === false){
 	header("Location: registration.php?success=false&failure=unknown");
 	exit();

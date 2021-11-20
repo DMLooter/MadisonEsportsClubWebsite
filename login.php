@@ -9,7 +9,7 @@ require_once $dbconfile;
 
 $conn = OpenConnection();
 
-$stmt = $conn->prepare("SELECT [hash], [Username] FROM Users WHERE Email = ?");
+$stmt = $conn->prepare("SELECT `hash`, `Username` FROM `Users` WHERE `Email` = ?;");
 $stmt->bind_param("s", $email);
 $stmt->execute();
 $result = $stmt->get_result();
