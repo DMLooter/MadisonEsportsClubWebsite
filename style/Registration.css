@@ -1,0 +1,13 @@
+form{
+	background-color:grey;
+	margin:auto;
+	width: 50%;
+	text-align:center;
+}
+form table{
+	width:100%;
+}
+
+.error{
+	color: red;
+}
