@@ -13,7 +13,7 @@ require_once $dbconfile;
 	<link rel="stylesheet" type="text/css" href="style/Registration.css">
 </head>
 <body>
-	<?php include 'header.html' ?>
+	<?php include 'header.php' ?>
 		<script type="text/javascript">
 				window.onload = function(){document.getElementById('events').className = 'current-item';};
 		</script>

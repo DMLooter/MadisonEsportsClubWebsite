@@ -44,7 +44,7 @@ function getEvents($day, $month, $year){
 	<link rel="stylesheet" type="text/css" href="style/Calendar.css">
 </head>
 <body>
-	<?php include 'header.html' ?>
+	<?php include 'header.php' ?>
 		<script type="text/javascript">
 				window.onload = function(){document.getElementById('events').className = 'current-item';};
 		</script>
