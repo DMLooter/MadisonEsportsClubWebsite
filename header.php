@@ -2,8 +2,13 @@
 	<div id="spacer"></div>
 	<div id="img"><img width="100px" height="100px" src="Images/Logo.png" /></div>
 	<div id="title"><h1>MADISON ESPORTS CLUB</h1></div>
-
-	<div id="account_buttons"><div id="login" class="button">Login</div><div id="register" class="button">Register</div></div>
+	<?php
+		if(isset($_SESSION["logged"]) && $_SESSION["logged"]){
+			print("<div id='account_buttons'><div id='user' class='button'>".$_SESSION["user"]."</div><a href='logout' class='button_link'><div id='logout' class='button'>Logout</div></a></div>");
+		}else{
+			print("<div id='account_buttons'><a href='loginpage' class='button_link'><div id='login' class='button'>Login</div></a><a href='registration' class='button_link'><div id='register' class='button'>Register</div></a></div>");
+		}
+	?>
 </div>
 
 <div class="menu-wrap">
@@ -23,4 +28,5 @@
 				</ul>
 		</nav>
 </div>
+<script src="header.js" type="text/javascript"></script>
 

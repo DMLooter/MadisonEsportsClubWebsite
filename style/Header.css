@@ -43,6 +43,10 @@ body{
 	border: 1px solid black;
 	text-align:center;
 }
+.button_link{
+	text-decoration:none;
+	color:black;
+}
 
 .button:hover{
 	box-shadow: 4px 4px 0px 0px black;

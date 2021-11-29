@@ -16,12 +16,12 @@ require_once $dbconfile;
 	<?php include 'header.php' ?>
 
 	<div id="body">
-		<form action="register.php" method="post">
+		<form action="login.php" method="post">
 			<table>
 			<tbody>
 				<tr>
 					<th colspan = "2">
-						<h2>Create An Account</h2>
+						<h2>Login</h2>
 					</th>
 				</tr>
 				<tr>
@@ -30,16 +30,7 @@ require_once $dbconfile;
 				</tr>
 				<?php
 					if(isset($_GET["failure"]) && $_GET["failure"] == "username"){
-						print("<tr class='error'><td colspan='2'>* Username is already taken</td></tr>");
-					}
-				?>
-				<tr>
-					<td><label for="email">Email</label></td>
-					<td><input id="email" name="e" /></td>
-				</tr>
-				<?php
-					if(isset($_GET["failure"]) && $_GET["failure"] == "email"){
-						print("<tr class='error'><td colspan='2'>* Email is already registered</td></tr>");
+						print("<tr class='error'><td colspan='2'>* Username is invalid</td></tr>");
 					}
 				?>
 				<tr>
@@ -47,8 +38,12 @@ require_once $dbconfile;
 					<td><input id="password" name="p" type="password" /></td>
 				</tr>
 				<?php
-					if(isset($_GET["failure"]) && $_GET["failure"] == "unknown"){
-						print("<tr class='error'><td colspan='2'>* An unknown error occured. Please contact Admins</td></tr>");
+					if(isset($_GET["failure"])){
+						if($_GET["failure"] == "password"){
+							print("<tr class='error'><td colspan='2'>* Invalid Password</td></tr>");
+						}else if($_GET["failure"] == "unknown"){
+							print("<tr class='error'><td colspan='2'>* An unknown error occured. Please contact Admins</td></tr>");
+						}
 					}
 				?>
 			</tbody>
