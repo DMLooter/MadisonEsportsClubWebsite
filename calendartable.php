@@ -1,8 +1,9 @@
 <table id="calendar">
 	<tbody>
 		<?php
-			$month = $_GET["month"];
-			$year = $_GET["year"];
+			$today = getdate();
+			$month = isset($_GET["month"]) ? $_GET["month"] : $today["mon"];
+			$year = isset($_GET["year"]) ? $_GET["year"] : $today["year"];
 
 			$dbconfile = parse_ini_file("db.ini")["db_connection_file"];
 			require_once $dbconfile;
