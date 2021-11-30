@@ -54,6 +54,10 @@ $conn = OpenConnection();
 					print("<option value='".$row["ID"]."'>".$row["Title"]."</option>");
 				}
 				print("</select></td></tr>");
+				print("<tr><td><label for='startdatetime'>Event Start:</label></td>");
+				print("<td><input id='startdatetime' name='start' type='datetime-local'/></td></tr>");
+				print("<tr><td><label for='enddatetime'>Event End:</label></td>");
+				print("<td><input id='enddatetime' name='end' type='datetime-local'/></td></tr>");
 			print("</tbody></table><input type='submit'></form>");
 			}
 			CloseConnection($conn);
