@@ -24,7 +24,14 @@
 										<li><a href="">Utilities</a></li>
 								</ul>-->
 						</li>
-						<li id="events"><a href="events">EVENTS</a></li>
+						<li id="createevent"><a href="createevent">ADD EVENT</a></li>
+						<li id="info"><a href"info">CLUB INFO</a>
+							<ul class="submenu">
+								<li><a href="games">GAMES</a></li>
+								<li><a href="board">BOARD</a></li>
+								<li><a href="about">ABOUT THE CLUB</a></li>
+							</ul>
+						</li>
 				</ul>
 		</nav>
 </div>

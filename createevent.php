@@ -17,7 +17,7 @@ $conn = OpenConnection();
 <body>
 	<?php include 'header.php' ?>
 		<script type="text/javascript">
-				window.onload = function(){document.getElementById('events').className = 'current-item';};
+				window.onload = function(){document.getElementById('createevent').className = 'current-item';};
 		</script>
 
 

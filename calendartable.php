@@ -1,4 +1,4 @@
-<table id="calendar">
+<table id="calendarTable">
 	<tbody>
 		<?php
 			$today = getdate();
@@ -12,8 +12,14 @@
 
 			$conn = OpenConnection();
 
-			$sql = "SELECT * FROM `Events` ORDER BY `Start` DESC, `Title`;";
-			$result = mysqli_query($conn, $sql);
+			// Make this change by month
+			$firstdate = $year."-".$month."-1";
+			$lastdate = $year."-".$month."-28";
+
+			$stmt = $conn->prepare("SELECT * FROM `Events` WHERE CAST(`Start` AS DATE) BETWEEN ? AND ? ORDER BY `Start` DESC, `Title`;");
+			$stmt->bind_param("ss", $firstdate, $lastdate);
+			$stmt->execute();
+			$result = $stmt->get_result();
 
 			$days = array();
 			while($row = mysqli_fetch_assoc($result)) {
@@ -33,13 +39,27 @@
 			$date = DateTime::createFromFormat('d-m-Y', '01-'.$input);
 			$firstdate = getdate($date->getTimestamp());
 
-			print("<tr id='header-row'><th colspan=7>".$firstdate['month']."</th></tr>");
+			$prevMonth = $month - 1;
+			$prevYear = $year;
+			$nextMonth = $month + 1;
+			$nextYear = $year;
+			if($prevMonth == 0){
+				$prevYear--;
+				$prevMonth = 12;
+			}else if($nextMonth == 13){
+				$nextYear++;
+				$nextMonth = 1;
+			}
+
+			print("<tr id='header-row'><th><a class='calendarButton_link' href='javascript:void()'><div data-month='".$prevMonth."' data-year='".$prevYear."' class='calendarButton'>Prev</div></a></th><th colspan=5>".$firstdate['month']."</th><th><a class='calendarButton_link' href='javascript:void()'><div class='calendarButton' data-month='".$nextMonth."' data-year='".$nextYear."'>Next</div></a></th></tr>");
 
 			$firstDayOfWeek = $firstdate['wday'];
 			$DIM = cal_days_in_month(0, $firstdate['mon'], $firstdate['year']);
 
 			$dow = 0;
-			for($dom = 1-$firstDayOfWeek; $dom < $DIM + (7 - ($DIM%7)); $dom++){
+			$weeks = ceil(($DIM + $firstDayOfWeek) / 7);
+			// This adds an extra row in february 2020, last day on a sunday.
+			for($dom = 1-$firstDayOfWeek; $dom <= $weeks * 7 - $firstDayOfWeek; $dom++){
 				if($dow == 0){
 					print("<tr>");
 				}
