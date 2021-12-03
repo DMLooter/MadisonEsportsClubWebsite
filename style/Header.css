@@ -143,7 +143,7 @@ body{
 	opacity:0;
 	transition:opacity linear 0.15s;
 	box-shadow:0px 2px 3px rgba(0,0,0,0.2);
-	//background:#7e3738;//2e2728
+	background:#7e3738;//2e2728
 }
 
 
@@ -158,5 +158,5 @@ body{
 }
 
 .submenu li a:hover, .submenu .current-item a{
-	//background:#3e7436;//3e3436
+	background:#3e7436;//3e3436
 }
