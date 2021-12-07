@@ -23,42 +23,53 @@ $conn = OpenConnection();
 
 	<div id="body">
 		<?php
-			if(!isset($_SESSION["logged"]) || !$_SESSION["logged"]){
-				print("<h1>Please Log in</h1>");
-				print("<p>Only Game Officers, Board Members, and Competitive Team Captains may edit events, please log in</p>");
-			}else{
-				print("<form action='callback/createevent.php' method='post'>
-				<table>
-				<tbody>
-					<tr>
-						<th colspan = '2'>
-							<h2>Create Event</h2>
-						</th>
-					</tr>
-					<tr>
-						<td><label for='eventtitle'>Title</label></td>
-						<td><input id='eventtitle' name='title' /></td>
-					</tr>
-					<tr>
-						<td><label for='location'>Location</label></td>
-						<td><input id='location' name='location' /></td>
-					</tr>");
-
-				$stmt = $conn->prepare("SELECT c.ID, c.Title FROM UserCalendar uc LEFT JOIN Calendars c ON (uc.CalendarID = c.ID) WHERE uc.UserID = ?;");
-//				print("SELECT c.ID, c.Title FROM UserCalendar uc LEFT JOIN Calendars c ON (uc.CalendarID = c.ID) WHERE uc.UserID = ".$_SESSION["user_id"].";");
+			if(isset($_SESSION["logged"]) && $_SESSION["logged"]){
+				$stmt = $conn->prepare("SELECT Admin Or BoardMember Or GameOfficer AS Creator FROM `Users` WHERE ID = ?;");
 				$stmt->bind_param("i", $_SESSION["user_id"]);
 				$stmt->execute();
 				$result = $stmt->get_result();
-				print("<tr><td><label for='calendar'>Calendar</label></td><td><select id='calendar' name='calendarID'>");
-				while($row = $result->fetch_assoc()){
-					print("<option value='".$row["ID"]."'>".$row["Title"]."</option>");
+				if($result->fetch_assoc()["Creator"] == 1){
+					print("<form action='callback/createevent.php' method='post'>
+					<table>
+					<tbody>
+						<tr>
+							<th colspan = '2'>
+								<h2>Create Event</h2>
+							</th>
+						</tr>
+						<tr>
+							<td><label for='eventtitle'>Title</label></td>
+							<td><input id='eventtitle' name='title' /></td>
+						</tr>
+						<tr>
+							<td><label for='location'>Location</label></td>
+							<td><input id='location' name='location' /></td>
+						</tr>");
+					$stmt->close();	
+
+					$stmt = $conn->prepare("SELECT c.ID, c.Title FROM UserCalendar uc LEFT JOIN Calendars c ON (uc.CalendarID = c.ID) WHERE uc.UserID = ?;");
+					$stmt->bind_param("i", $_SESSION["user_id"]);
+					$stmt->execute();
+					$result = $stmt->get_result();
+					
+					print("<tr><td><label for='calendar'>Calendar</label></td><td><select id='calendar' name='calendarID'>");
+					while($row = $result->fetch_assoc()){
+						print("<option value='".$row["ID"]."'>".$row["Title"]."</option>");
+					}
+					print("</select></td></tr>");
+					
+					print("<tr><td><label for='startdatetime'>Event Start:</label></td>");
+					print("<td><input id='startdatetime' name='start' type='datetime-local'/></td></tr>");
+					print("<tr><td><label for='enddatetime'>Event End:</label></td>");
+					print("<td><input id='enddatetime' name='end' type='datetime-local'/></td></tr>");
+					print("</tbody></table><input type='submit'></form>");
+				}else{
+					print("<h1>Not allowed</h1>");
+					print("<p>Only Game Officers, Board Members, and Competitive Team Captains may edit events.</p>");
 				}
-				print("</select></td></tr>");
-				print("<tr><td><label for='startdatetime'>Event Start:</label></td>");
-				print("<td><input id='startdatetime' name='start' type='datetime-local'/></td></tr>");
-				print("<tr><td><label for='enddatetime'>Event End:</label></td>");
-				print("<td><input id='enddatetime' name='end' type='datetime-local'/></td></tr>");
-			print("</tbody></table><input type='submit'></form>");
+			}else{
+				print("<h1>Please Log in</h1>");
+				print("<p>Only Game Officers, Board Members, and Competitive Team Captains may edit events, please log in</p>");
 			}
 			CloseConnection($conn);
 		?>

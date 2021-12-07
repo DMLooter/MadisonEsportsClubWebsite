@@ -12,7 +12,7 @@
 
 			$conn = OpenConnection();
 
-			// Make this change by month
+			//TODO Make this change by month
 			$firstdate = $year."-".$month."-1";
 			$lastdate = $year."-".$month."-28";
 
@@ -58,7 +58,6 @@
 
 			$dow = 0;
 			$weeks = ceil(($DIM + $firstDayOfWeek) / 7);
-			// This adds an extra row in february 2020, last day on a sunday.
 			for($dom = 1-$firstDayOfWeek; $dom <= $weeks * 7 - $firstDayOfWeek; $dom++){
 				if($dow == 0){
 					print("<tr>");
@@ -67,7 +66,8 @@
 					print("<td class='value'><div class='day'><div class='date'>".$dom."</div>");
 					if(array_key_exists($dom, $days)){
 						foreach($days[$dom] as $row){
-							print("<div class='event'>".$row["Title"]."</div>");
+							//TODO add a calendarID data tag here so we can hide events.
+							print("<div class='event' data-calendar-id='".$row["CalendarID"]."'>".$row["Title"]."</div>");
 						}
 					}
 					print("<div class='spacer'></div></div></td>");

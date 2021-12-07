@@ -24,6 +24,7 @@ session_start();
 		<h1>Calendar</h1>
 		<p>Here is a calendar of events in the Madison Esports Club.</p>
 		<?php include 'calendartable.php' ?>
+		<?php include 'calendarlist.php' ?>
 	</div>
 	<script type="text/javascript" src="calendar.js"></script>
 </body>

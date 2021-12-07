@@ -15,6 +15,20 @@ function registerHandlers(){
 		let year = $(this).attr("data-year");
 		loadCalendar(month, year);
 	});
+	
+	$(".calendarSelector__checkbox").on("change", function(){
+		let calendarID = $(this).attr("data-calendar-id");
+		if($(this).is(":checked")){
+			$(`.event[data-calendar-id='${calendarID}']`).each(function(){
+				$(this).show();
+			});
+		}else{
+			$(`.event[data-calendar-id='${calendarID}']`).each(function(){
+				$(this).hide();
+			});
+		}
+	});
 }
+
 
 registerHandlers();
