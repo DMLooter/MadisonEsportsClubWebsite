@@ -2,4 +2,5 @@
 .vscode/*
 *.htaccess
 jquery-3.6.0.min.js
-data/*.html
+data/games.html
+data/board.html
