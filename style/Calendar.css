@@ -35,8 +35,8 @@ th {
 
 .event{
 	flex-grow: 0;
-	line-height:1.5em;
-	min-height: 1.5em;
+	line-height:1em;
+	min-height: 1em;
 	border: 1px solid black;
 }
 

@@ -29,7 +29,7 @@
 	foreach($groups as $groupID => $group){
 		print("<div class='calendarGroup'>".$groupNames[$groupID]."</div>");
 		foreach($group as $ID => $title){
-			print("<div class='calendarSelector'><input class='calendarSelector__checkbox' id='calendarSelector__".$ID."' data-calendar-ID='".$ID."' type='checkbox'/>".$title."</div>");
+			print("<div class='calendarSelector'><input checked class='calendarSelector__checkbox' id='calendarSelector__".$ID."' data-calendar-ID='".$ID."' type='checkbox'/>".$title."</div>");
 		}
 	}
 ?>
