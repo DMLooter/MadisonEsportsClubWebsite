@@ -3,6 +3,31 @@ session_start();
 
 $dbconfile = parse_ini_file("db.ini")["db_connection_file"];
 require_once $dbconfile;
+
+if(isset($_COOKIE["session"])){
+	$conn = OpenConnection();
+	$stmt = $conn->prepare("SELECT `ID`, `Username` FROM `Users` WHERE `ID` = ?;");
+	$stmt->bind_param("i", $_COOKIE["session"]);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	if($result->num_rows == 1){
+		$row = $result->fetch_assoc();
+		$stmt->close();
+		//Set Session vars
+		$_SESSION["logged"] = true;
+		$_SESSION["user"] = $row["Username"];
+		$_SESSION["user_id"] = $_COOKIE["session"];
+
+		//Set cookie
+		setcookie("session",$_COOKIE["session"], time()+(60*60*24*30), "/"); 
+
+		CloseConnection($conn);
+		header("Location: index");
+		exit();
+	}
+	$stmt->close();
+	CloseConnection($conn);
+}
 ?>
 
 <!DOCTYPE html>
