@@ -25,8 +25,16 @@
 			while($row = mysqli_fetch_assoc($result)) {
 				$title = $row["Title"];
 				$loc = $row["Location"];
-				$start = getdate(strtotime($row["Start"]));
-				$end = getdate(strtotime($row["End"]));
+
+				//Convert times to hours.
+				$startTS = strtotime($row["Start"]);
+				$start = getdate($startTS);
+				$row["Start"] = date("g:i A", $startTS);
+
+				$endTS = strtotime($row["End"]);
+				$end = getdate($endTS);
+				$row["End"] = date("g:i A", $endTS);
+
 				if(array_key_exists($start['mday'], $days) === false){
 					$days[$start["mday"]] = array();
 				}
@@ -67,7 +75,11 @@
 					if(array_key_exists($dom, $days)){
 						foreach($days[$dom] as $row){
 							//TODO add a calendarID data tag here so we can hide events.
-							print("<div class='event' data-calendar-id='".$row["CalendarID"]."'>".$row["Title"]."</div>");
+							print("<div class='event' data-event-id='".$row["ID"]."' data-calendar-id='".$row["CalendarID"]."'>".$row["Title"]."</div>");
+							print("<div class='tooltip' role='tooltip' data-event-id='".$row["ID"]."'>"
+									.$row["Title"]
+									."<br>Location: ".$row["Location"]
+									."<br>".$row["Start"]." - ".$row["End"]."</div>");
 						}
 					}
 					print("<div class='spacer'></div></div></td>");

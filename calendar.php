@@ -26,6 +26,7 @@ session_start();
 		<?php include 'calendartable.php' ?>
 		<?php include 'calendarlist.php' ?>
 	</div>
+	<script src="https://unpkg.com/@popperjs/core@2"></script>
 	<script type="text/javascript" src="calendar.js"></script>
 </body>
 </html>

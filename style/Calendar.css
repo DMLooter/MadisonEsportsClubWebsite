@@ -12,6 +12,7 @@ td{
 	min-height: 10em;
 	border: 1px black solid;
 	text-align: center;
+	vertical-align:top;
 }
 
 .day{
@@ -38,14 +39,29 @@ th {
 	line-height:1em;
 	min-height: 1em;
 	border: 1px solid black;
+	margin-top:.1em;
+}
+
+.tooltip{
+	background: #333;
+    color: white;
+    font-weight: bold;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+	display: none;
+}
+
+.tooltip[data-show]{
+	display: block;
 }
 
 .date {
 	flex-grow: 0;
-	line-height:1.5em;
-	height: 2em;
-	text-align: left;
-	border: 1px solid black;
+	line-height:1em;
+	height: 1em;
+	text-align: center;
+	border-bottom: 1px solid black;
 }
 
 .spacer{
