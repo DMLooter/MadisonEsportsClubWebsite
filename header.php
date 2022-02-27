@@ -16,16 +16,10 @@
 				<ul class="clearfix">
 						<li id="home"><a href="/index">HOME</a></li>
 						<li id="calendar">
-								<a href="/calendar">CALENDAR</a>
-								<!--<a href="games">Projects <span class="arrow">&#9660;</span>$
-
-								<ul class="submenu">
-										<li><a href="">Games</a></li>
-										<li><a href="">Utilities</a></li>
-								</ul>-->
+							<a href="/calendar">EVENTS</a>
 						</li>
-						<li id="createevent"><a href="/createevent">ADD EVENT</a></li>
-						<li id="info"><a href"/info">CLUB INFO</a>
+						<li id="streams"><a href="/streams">STREAMS</a></li>
+						<li id="info"><a href"/info">CLUB INFO<span class="arrow">&#9660;</span></a>
 							<ul class="submenu">
 								<li><a href="/games">GAMES</a></li>
 								<li><a href="/board">BOARD</a></li>
